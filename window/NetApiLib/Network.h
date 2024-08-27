@@ -129,8 +129,6 @@ extern QString _account;
 
 extern QString _passwd;
 
-extern int _updateTime;
-
 extern int _reqTimeOut;
 
 

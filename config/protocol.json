@@ -57,11 +57,14 @@
             }
         },
         {
+            "note": "接口模板",
             "api": "",
             "timer": 0,
             "count": 0,
             "update": false,
-            "data": {}
+            "data": {
+                "": ""
+            }
         }
     ]
 }

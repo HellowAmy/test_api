@@ -126,7 +126,6 @@ QString _passwd = "";
 
 int _reqTimeOut = 30000;
 
-int _updateTime = 10;
 
 void Post(QNetworkRequest &req, const QByteArray &data, RspCallback callback, bool takeToken)
 {
@@ -290,7 +289,6 @@ void init(std::function<void(bool)> callback)
     _passwd = settings.value("Server/Password", "Admin666").toString();
     _hostIp = settings.value("Server/HostIP", "172.16.21.21").toString();
     _hostPort = settings.value("Server/HostPort", 50000).toUInt();
-    _updateTime = settings.value("Server/UpdateTime", 50000).toUInt();
 
     SignalRInit(callback);
 }
