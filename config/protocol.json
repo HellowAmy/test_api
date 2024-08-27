@@ -1,0 +1,67 @@
+{
+    "ApiList": [
+        {
+            "note": "登录到系统（这是注释，也可不写注释）",
+            "api": "/api/Login",
+            "timer": 1000,
+            "count": 3,
+            "update": false,
+            "data": {
+                "UserName": "admin",
+                "Password": "Admin666"
+            }
+        },
+        {
+            "note": "查询灵敏度",
+            "api": "/api/MicSI/MicSensitiGet",
+            "timer": 1000,
+            "count": 5,
+            "update": true,
+            "data": {
+                "Id": 15
+            }
+        },
+        {
+            "note": "修改灵敏度",
+            "api": "/api/MicSI/MicSensitivityUseingSave",
+            "timer": 500,
+            "count": 2,
+            "update": true,
+            "data": {
+                "Id": 15,
+                "MicType": 225,
+                "Sensitivity": 3
+            }
+        },
+        {
+            "note": "修改关闭时间",
+            "api": "/api/MicSI/MicAutoCloseTime",
+            "timer": 500,
+            "count": 2,
+            "update": true,
+            "data": {
+                "Id": 15,
+                "Time": 1000,
+                "VCThreshold": 0
+            }
+        },
+        {
+            "note": "退出登录",
+            "api": "/api/Login/LoginOut",
+            "timer": 0,
+            "count": 1,
+            "update": false,
+            "data": {
+                "SessionId": "string",
+                "FromSSO": true
+            }
+        },
+        {
+            "api": "",
+            "timer": 0,
+            "count": 0,
+            "update": false,
+            "data": {}
+        }
+    ]
+}
