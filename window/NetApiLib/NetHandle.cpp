@@ -26,19 +26,40 @@ void NetHandle::SendToApiPost(QString api, Json::Value data)
         req, UtilFunc::WriteJson(data).c_str(),
         [=](QByteArray &rspData, ...) {
             UtilFunc::ParseJson(rspData.data(), [&](Json::Value &value) {
-                flogd($Q(api) $(UtilFunc::WriteJsonFormat(value)));   
-            }).Error([&] {  });
+                flogd($Q(api) $(UtilFunc::WriteJsonFormat(value)));
+            }).Error([&] { });
         },
         false);
 }
 
 void NetHandle::SendToApiGet(QString api, Json::Value data)
 {
+    flogd("SendToApiGet: "<<$Q(api));
 
+    QString urlID = api;
+    QNetworkRequest req;
+    auto url = Network::Api(api);
+    QUrlQuery query;
+    for(auto it = data.begin();it != data.end();it++)
+    {
+        QString key = QString::fromStdString(it.name());
+        QString val = QString::fromStdString((*it).asString());
+        query.addQueryItem(key, val);
+        vlogd($Q(key)$Q(val));
+    } 
+    url.setQuery(query);
+    req.setUrl(url);
+    req.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    Network::Get(req, [=](QByteArray &rspData, ...) {
+        UtilFunc::ParseJson(rspData.data(), [&](Json::Value &value) {
+            flogd($Q(api) $(UtilFunc::WriteJsonFormat(value)));
+        }).Error([&] {});
+    });
 }
 
 void NetHandle::PushTaskPost(Json::Value config)
 {
+    auto type = config["type"].asString(); 
     int time = config["timer"].asInt(); 
     int count = config["count"].asInt(); 
     auto sp_next = std::make_shared<int>(0);
@@ -47,7 +68,14 @@ void NetHandle::PushTaskPost(Json::Value config)
     {
         QTimer *ti = new QTimer(this);
         connect(ti,&QTimer::timeout,[=](){
-            SendToApiPost(QString::fromStdString(config["api"].asString()),config["data"]);
+            if(type == "post")
+            {
+                SendToApiPost(QString::fromStdString(config["api"].asString()),config["data"]);
+            }
+            else if(type == "get")
+            {
+                SendToApiGet(QString::fromStdString(config["api"].asString()),config["data"]);
+            }
             if(count != -1)
             {
                 (*sp_next)++;
@@ -62,7 +90,14 @@ void NetHandle::PushTaskPost(Json::Value config)
     }
     else if(count == 1)
     {
-        SendToApiPost(QString::fromStdString(config["api"].asString()),config["data"]);
+        if(type == "post")
+        {
+            SendToApiPost(QString::fromStdString(config["api"].asString()),config["data"]);
+        }
+        else if(type == "get")
+        {
+            SendToApiGet(QString::fromStdString(config["api"].asString()),config["data"]);
+        }
     }
 
 }

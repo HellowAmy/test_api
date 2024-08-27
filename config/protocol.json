@@ -3,6 +3,7 @@
         {
             "note": "登录到系统（这是注释，也可不写注释）",
             "api": "/api/Login",
+            "type": "post",
             "timer": 1000,
             "count": 3,
             "update": false,
@@ -14,8 +15,9 @@
         {
             "note": "查询灵敏度",
             "api": "/api/MicSI/MicSensitiGet",
+            "type": "post",
             "timer": 1000,
-            "count": 5,
+            "count": 1,
             "update": true,
             "data": {
                 "Id": 15
@@ -24,8 +26,9 @@
         {
             "note": "修改灵敏度",
             "api": "/api/MicSI/MicSensitivityUseingSave",
+            "type": "post",
             "timer": 500,
-            "count": 2,
+            "count": 1,
             "update": true,
             "data": {
                 "Id": 15,
@@ -36,6 +39,7 @@
         {
             "note": "修改关闭时间",
             "api": "/api/MicSI/MicAutoCloseTime",
+            "type": "post",
             "timer": 500,
             "count": 2,
             "update": false,
@@ -48,6 +52,7 @@
         {
             "note": "退出登录",
             "api": "/api/Login/LoginOut",
+            "type": "post",
             "timer": 0,
             "count": 1,
             "update": false,
@@ -57,8 +62,38 @@
             }
         },
         {
+            "note": "获取日志",
+            "api": "/api/Log",
+            "type": "get",
+            "timer": 0,
+            "count": 1,
+            "update": true,
+            "data": {
+                "MeetId": "ddade7e4-d86f-4e6b-afc2-64d7006d5183",
+                "Conditionals": "",
+                "Page": "0",
+                "PageSize": "100"
+            }
+        },
+        {
+            "note": "获取会议列表",
+            "api": "/api/Meeting",
+            "type": "get",
+            "timer": 0,
+            "count": 1,
+            "update": true,
+            "data": {
+                "MeetingStatus": "",
+                "Conditionals": "",
+                "Page": "0",
+                "PageSize": "100",
+                "UKey": "123qwe"
+            }
+        },
+        {
             "note": "接口模板",
             "api": "",
+            "type": "post / get",
             "timer": 0,
             "count": 0,
             "update": false,
