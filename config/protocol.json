@@ -38,7 +38,7 @@
             "api": "/api/MicSI/MicAutoCloseTime",
             "timer": 500,
             "count": 2,
-            "update": true,
+            "update": false,
             "data": {
                 "Id": 15,
                 "Time": 1000,
