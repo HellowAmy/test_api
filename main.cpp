@@ -16,6 +16,12 @@ using namespace std;
 int run_main_app(int argc, char *argv[])
 {
     QApplication a(argc,argv);
+    a.setStyleSheet(R"(
+* {
+    font-family: Consolas;
+    font-size: 15px;
+}
+    )");
 
     main_window w;
     w.resize(500,500);
