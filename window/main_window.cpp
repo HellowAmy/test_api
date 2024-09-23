@@ -12,7 +12,7 @@ main_window::main_window(QWidget *parent) : QWidget(parent)
     this->setWindowTitle("国产主机协议测试");
     this->setWindowIcon(QIcon("../config/pic/logo.ico"));
 
-    timer_id = startTimer(1000);
+    _timer_id = startTimer(1000);
 
     QVBoxLayout *lay_main = new QVBoxLayout(this);
     {
@@ -58,12 +58,20 @@ main_window::main_window(QWidget *parent) : QWidget(parent)
         _lab_err_tips->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Maximum);
         _lab_err_tips->setMaximumHeight(150);
 
+        lay->addWidget(_edit_json);
+        lay->addWidget(_lab_err_tips);
+        lay_main->addLayout(lay);
+    }
+    {
+        QHBoxLayout *lay = new QHBoxLayout;
         _lab_timer_num = new QLabel(this);
         _lab_timer_num->setText(QString("[定时任务数量: %1]").arg(0));
 
-        lay->addWidget(_edit_json);
-        lay->addWidget(_lab_err_tips);
+        _lab_connect_time = new QLabel(this);
+        _lab_connect_time->setText(QString("[主机连接时间: %1]").arg(_timer_connecting));
+
         lay->addWidget(_lab_timer_num);
+        lay->addWidget(_lab_connect_time);
         lay_main->addLayout(lay);
     }
 
@@ -137,7 +145,7 @@ main_window::main_window(QWidget *parent) : QWidget(parent)
     connect(_sp_net_,&NetHandle::sn_connect_host,[=](int type){
         if(type == 1)
         {
-            timer_count = 0;
+            _timer_count = 0;
             SetStatusHost(true);
         }
         else 
@@ -166,6 +174,7 @@ main_window::~main_window()
 
 void main_window::SetStatusSdk(bool ok)
 {
+    _is_connect_sdk = ok;
     if(ok)
     {
         _but_connect->setEnabled(true);
@@ -180,6 +189,7 @@ void main_window::SetStatusSdk(bool ok)
 
 void main_window::SetStatusHost(bool ok)
 {
+    _is_connect_host = ok;
     if(ok)
     {
         _lab_status_host->setText("[主机连接中]");
@@ -207,10 +217,25 @@ void main_window::SetErrTips(QString info,bool err)
 
 void main_window::timerEvent(QTimerEvent *event)
 {
-    if(timer_id = event->timerId())
+    if(_timer_id = event->timerId())
     {
-        timer_count++;
-        if(timer_count >= 3)
+        if(_is_connect_host)
+        {
+            _timer_connecting++;
+            _lab_connect_time->setText(QString("[连接主机时间: %1]").arg(_timer_connecting));
+        }
+        else 
+        {
+            if(_timer_connecting != 0)
+            {
+                SetErrTips(QString("上次连接主机时间: %1").arg(_timer_connecting) ,false);
+                _timer_connecting = 0;
+                _lab_connect_time->setText(QString("[连接主机时间: %1]").arg(_timer_connecting));
+            }
+        }
+
+        _timer_count++;
+        if(_timer_count >= 3)
         {
             SetStatusHost(false);
         }

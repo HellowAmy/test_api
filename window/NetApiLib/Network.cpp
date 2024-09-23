@@ -120,9 +120,9 @@ QByteArray _refreshToken = "";
 
 QString _devId = "";
 
-QString _account = "";
+// QString _account = "";
 
-QString _passwd = "";
+// QString _passwd = "";
 
 int _reqTimeOut = 30000;
 
@@ -285,8 +285,6 @@ void init(std::function<void(bool)> callback)
     settings.setIniCodec("UTF-8");
     _serviceIp = settings.value("Server/ServerIp", "127.0.0.1").toString();
     _servicePort = settings.value("Server/ServerPort", 5000).toUInt();
-    _account = settings.value("Server/Account", "admin").toString();
-    _passwd = settings.value("Server/Password", "Admin666").toString();
     _hostIp = settings.value("Server/HostIP", "172.16.21.21").toString();
     _hostPort = settings.value("Server/HostPort", 50000).toUInt();
 

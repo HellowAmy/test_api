@@ -34,8 +34,11 @@ protected:
 
 
 private:
-    int timer_id = 0;
-    int timer_count = 0;
+    bool _is_connect_host = false;
+    bool _is_connect_sdk = false;
+    int _timer_id = 0;
+    int _timer_count = 0;
+    int _timer_connecting = 0;
 
     QLabel *_lab_status_sdk = nullptr;
     QLabel *_lab_status_host = nullptr;
@@ -49,6 +52,7 @@ private:
     QTextEdit *_edit_json = nullptr;
     QListWidget *_lab_err_tips = nullptr;
     QLabel *_lab_timer_num = nullptr;
+    QLabel *_lab_connect_time = nullptr;
 
 };
 #endif // MAIN_WINDOW_H

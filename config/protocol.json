@@ -1,15 +1,27 @@
 {
     "ApiList": [
         {
-            "note": "登录到系统（这是注释，也可不写注释）",
+            "note": "登录到系统",
             "api": "/api/Login",
             "type": "post",
-            "timer": 1000,
-            "count": -1,
+            "timer": 0,
+            "count": 0,
             "update": false,
             "data": {
                 "UserName": "admin",
-                "Password": "Admin666"
+                "Password": "Admin@1993"
+            }
+        },
+        {
+            "note": "退出登录",
+            "api": "/api/Login/LoginOut",
+            "type": "post",
+            "timer": 0,
+            "count": 0,
+            "update": false,
+            "data": {
+                "SessionId": "string",
+                "FromSSO": true
             }
         },
         {
@@ -76,24 +88,12 @@
             }
         },
         {
-            "note": "退出登录",
-            "api": "/api/Login/LoginOut",
-            "type": "post",
-            "timer": 0,
-            "count": 0,
-            "update": false,
-            "data": {
-                "SessionId": "string",
-                "FromSSO": true
-            }
-        },
-        {
             "note": "获取日志",
             "api": "/api/Log",
             "type": "get",
             "timer": 0,
             "count": 1,
-            "update": true,
+            "update": false,
             "data": {
                 "MeetId": "ddade7e4-d86f-4e6b-afc2-64d7006d5183",
                 "Conditionals": "",
@@ -107,13 +107,133 @@
             "type": "get",
             "timer": 0,
             "count": 1,
-            "update": true,
+            "update": false,
             "data": {
                 "MeetingStatus": "",
                 "Conditionals": "",
                 "Page": "0",
                 "PageSize": "100",
                 "UKey": "123qwe"
+            }
+        },
+        {
+            "note": "获取均衡器",
+            "api": "/api/OutputEqualizerType",
+            "type": "get",
+            "timer": 100,
+            "count": -1,
+            "update": true,
+            "data": {
+                "Channel": "0"
+            }
+        },
+        {
+            "note": "获取均衡器",
+            "api": "/api/OutputEqualizerType",
+            "type": "get",
+            "timer": 100,
+            "count": -1,
+            "update": true,
+            "data": {
+                "Channel": "1"
+            }
+        },
+        {
+            "note": "获取均衡器开关",
+            "api": "/api/OutputEqualizerType",
+            "type": "get",
+            "timer": 100,
+            "count": -1,
+            "update": true,
+            "data": {
+                "Channel": "2"
+            }
+        },
+        {
+            "note": "获取均衡器图示",
+            "api": "/api/OutputGraphicEqualizer",
+            "type": "get",
+            "timer": 100,
+            "count": -1,
+            "update": true,
+            "data": {
+                "GraphicEqualizerSeg": "0",
+                "Channel": "1"
+            }
+        },
+        {
+            "note": "获取均衡器图示",
+            "api": "/api/OutputGraphicEqualizer",
+            "type": "get",
+            "timer": 100,
+            "count": -1,
+            "update": true,
+            "data": {
+                "GraphicEqualizerSeg": "1",
+                "Channel": "1"
+            }
+        },
+        {
+            "note": "获取均衡器图示",
+            "api": "/api/OutputGraphicEqualizer",
+            "type": "get",
+            "timer": 100,
+            "count": -1,
+            "update": true,
+            "data": {
+                "GraphicEqualizerSeg": "0",
+                "Channel": "0"
+            }
+        },
+        {
+            "note": "获取均衡器图示",
+            "api": "/api/OutputGraphicEqualizer",
+            "type": "get",
+            "timer": 100,
+            "count": -1,
+            "update": true,
+            "data": {
+                "GraphicEqualizerSeg": "1",
+                "Channel": "0"
+            }
+        },
+        {
+            "note": "获取均衡器参量",
+            "api": "/api/OutputParametricEqualizer",
+            "type": "get",
+            "timer": 100,
+            "count": -1,
+            "update": true,
+            "data": {
+                "Channel": "0"
+            }
+        },
+        {
+            "note": "获取均衡器参量",
+            "api": "/api/OutputParametricEqualizer",
+            "type": "get",
+            "timer": 100,
+            "count": -1,
+            "update": true,
+            "data": {
+                "Channel": "1"
+            }
+        },
+        {
+            "note": "修改均衡器参量",
+            "api": "/api/OutputParametricEqualizer",
+            "type": "post",
+            "timer": 100,
+            "count": -1,
+            "update": true,
+            "data": {
+                "Channel": 0,
+                "Index": 0,
+                "IsOpen": true,
+                "ParametType": 0,
+                "CenterFrequency": 300,
+                "Gain": 3.3,
+                "Qvalue": 2.2
             }
         },
         {
@@ -127,5 +247,6 @@
                 "": ""
             }
         }
-    ]
+    ],
+    "commit": "[note : 接口的描述] [api : sdk接口的api] [type : 有post/get两种推送类型各选-get的参数类型全是字符串-post的参数类型需要参考接口] [timer : 循环发送时的间隔时间-毫秒单位] [count : 发送次数-如果是“-1”则无限次] [update : 点击发送配置文件时是否刷新-如果不刷新则等于关闭该接口] [data : api对应发送的数据]"
 }
