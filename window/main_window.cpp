@@ -5,10 +5,12 @@
 #include <QDebug>
 #include <QUdpSocket>
 #include <QHBoxLayout>
+#include <QIcon>
 
 main_window::main_window(QWidget *parent) : QWidget(parent)
 {
     this->setWindowTitle("国产主机协议测试");
+    this->setWindowIcon(QIcon("../config/pic/logo.ico"));
 
     timer_id = startTimer(1000);
 
@@ -30,7 +32,7 @@ main_window::main_window(QWidget *parent) : QWidget(parent)
         QHBoxLayout *lay = new QHBoxLayout;
         _but_send_api = new QPushButton("[发送配置指定协议]",this);
         _edit_api = new QLineEdit(this);
-        _edit_api->setMinimumHeight(_but_send_api->height());
+        _edit_api->resize(_edit_api->width(),_but_send_api->height());
 
         lay->addWidget(_edit_api);
         lay->addWidget(_but_send_api);
