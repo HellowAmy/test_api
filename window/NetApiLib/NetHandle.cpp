@@ -15,6 +15,7 @@ NetHandle::~NetHandle()
 void NetHandle::SendToApiPost(QString api, Json::Value data)
 {
     flogd("SendToApiPost: "<<$Q(api));
+    _countSend++;
 
     data["Ip"] = Network::_hostIp.toStdString();
     data["Port"] = Network::_hostPort;
@@ -35,6 +36,7 @@ void NetHandle::SendToApiPost(QString api, Json::Value data)
 void NetHandle::SendToApiGet(QString api, Json::Value data)
 {
     flogd("SendToApiGet: "<<$Q(api));
+    _countSend++;
 
     QString urlID = api;
     QNetworkRequest req;
@@ -112,4 +114,15 @@ void NetHandle::ResetTask()
     }
     _vecTask.clear();
     emit sn_timer_num(_vecTask.size());
+
+    if(_countSend > 0)
+    {
+        emit sn_reset_count(_countSend);
+        _countSend = 0;
+    }
+}
+
+int NetHandle::GetCountSend()
+{
+    return _countSend;
 }

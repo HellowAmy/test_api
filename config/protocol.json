@@ -9,7 +9,7 @@
             "update": false,
             "data": {
                 "UserName": "admin",
-                "Password": "Admin@1993"
+                "Password": "Admin666"
             }
         },
         {
@@ -54,7 +54,7 @@
             "type": "post",
             "timer": 200,
             "count": -1,
-            "update": true,
+            "update": false,
             "data": {
                 "Id": 3,
                 "MicType": 225,
@@ -67,7 +67,7 @@
             "type": "post",
             "timer": 200,
             "count": -1,
-            "update": true,
+            "update": false,
             "data": {
                 "Id": 1,
                 "MicType": 225,
@@ -167,7 +167,7 @@
             "type": "get",
             "timer": 100,
             "count": -1,
-            "update": true,
+            "update": false,
             "data": {
                 "GraphicEqualizerSeg": "1",
                 "Channel": "1"
@@ -179,7 +179,7 @@
             "type": "get",
             "timer": 100,
             "count": -1,
-            "update": true,
+            "update": false,
             "data": {
                 "GraphicEqualizerSeg": "0",
                 "Channel": "0"
@@ -191,7 +191,7 @@
             "type": "get",
             "timer": 100,
             "count": -1,
-            "update": true,
+            "update": false,
             "data": {
                 "GraphicEqualizerSeg": "1",
                 "Channel": "0"
@@ -203,7 +203,7 @@
             "type": "get",
             "timer": 100,
             "count": -1,
-            "update": true,
+            "update": false,
             "data": {
                 "Channel": "0"
             }
@@ -214,7 +214,7 @@
             "type": "get",
             "timer": 100,
             "count": -1,
-            "update": true,
+            "update": false,
             "data": {
                 "Channel": "1"
             }

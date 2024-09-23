@@ -53,6 +53,7 @@ private:
     QListWidget *_lab_err_tips = nullptr;
     QLabel *_lab_timer_num = nullptr;
     QLabel *_lab_connect_time = nullptr;
+    QLabel *_lab_count_send = nullptr;
 
 };
 #endif // MAIN_WINDOW_H

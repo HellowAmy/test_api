@@ -70,8 +70,12 @@ main_window::main_window(QWidget *parent) : QWidget(parent)
         _lab_connect_time = new QLabel(this);
         _lab_connect_time->setText(QString("[主机连接时间: %1]").arg(_timer_connecting));
 
+        _lab_count_send = new QLabel(this);
+        _lab_count_send->setText(QString("[累计发送: %1]").arg(0));
+
         lay->addWidget(_lab_timer_num);
         lay->addWidget(_lab_connect_time);
+        lay->addWidget(_lab_count_send);
         lay_main->addLayout(lay);
     }
 
@@ -166,6 +170,10 @@ main_window::main_window(QWidget *parent) : QWidget(parent)
     connect(_sp_net_,&NetHandle::sn_timer_num,[=](int num){
         _lab_timer_num->setText(QString("[定时任务数量: %1]").arg(num));
     });
+    connect(_sp_net_,&NetHandle::sn_reset_count,[=](int num){
+        SetErrTips(QString("累计发送: %1").arg(num) ,false);
+    });
+
 }
 
 main_window::~main_window()
@@ -178,11 +186,13 @@ void main_window::SetStatusSdk(bool ok)
     if(ok)
     {
         _but_connect->setEnabled(true);
+        _but_quit->setEnabled(true);
         _lab_status_sdk->setText("[SDK连接中]");
     }
     else 
     {
         _but_connect->setEnabled(false);
+        _but_quit->setEnabled(false);
         _lab_status_sdk->setText("[SDK已离线]");
     }
 }
@@ -223,6 +233,7 @@ void main_window::timerEvent(QTimerEvent *event)
         {
             _timer_connecting++;
             _lab_connect_time->setText(QString("[连接主机时间: %1]").arg(_timer_connecting));
+            _lab_count_send->setText(QString("[累计发送: %1]").arg(_sp_net_->GetCountSend()));
         }
         else 
         {

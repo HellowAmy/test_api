@@ -53,6 +53,7 @@ int perse_arg(int argc, char *argv[])
 int main(int argc, char *argv[])
 {
     Tflogs::get()->init("../config/out.log");
+    Tflogs::get()->set_length(10*1000*1000);
     Tflogs::get()->set_level(vlevel4::e_info);
     Tvlogs::get()->set_level(vlevel4::e_info);
 

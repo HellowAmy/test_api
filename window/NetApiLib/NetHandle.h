@@ -25,6 +25,8 @@ public:
 
     void ResetTask();
 
+    int GetCountSend();
+
 signals:
     void sn_connect_host(int type);
 
@@ -34,7 +36,10 @@ signals:
 
     void sn_timer_num(int type);
 
+    void sn_reset_count(int type);
+
 protected:
+    int _countSend = 0;
     std::vector<QTimer*> _vecTask;
 
 private:
