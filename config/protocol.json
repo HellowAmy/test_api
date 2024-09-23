@@ -5,7 +5,7 @@
             "api": "/api/Login",
             "type": "post",
             "timer": 1000,
-            "count": 3,
+            "count": -1,
             "update": false,
             "data": {
                 "UserName": "admin",
@@ -17,7 +17,7 @@
             "api": "/api/MicSI/MicSensitiGet",
             "type": "post",
             "timer": 1000,
-            "count": 1,
+            "count": -1,
             "update": true,
             "data": {
                 "Id": 15
@@ -28,10 +28,36 @@
             "api": "/api/MicSI/MicSensitivityUseingSave",
             "type": "post",
             "timer": 500,
-            "count": 1,
+            "count": -1,
             "update": true,
             "data": {
                 "Id": 15,
+                "MicType": 225,
+                "Sensitivity": 3
+            }
+        },
+        {
+            "note": "修改灵敏度",
+            "api": "/api/MicSI/MicSensitivityUseingSave",
+            "type": "post",
+            "timer": 200,
+            "count": -1,
+            "update": true,
+            "data": {
+                "Id": 3,
+                "MicType": 225,
+                "Sensitivity": 3
+            }
+        },
+        {
+            "note": "修改灵敏度",
+            "api": "/api/MicSI/MicSensitivityUseingSave",
+            "type": "post",
+            "timer": 200,
+            "count": -1,
+            "update": true,
+            "data": {
+                "Id": 1,
                 "MicType": 225,
                 "Sensitivity": 3
             }
@@ -54,7 +80,7 @@
             "api": "/api/Login/LoginOut",
             "type": "post",
             "timer": 0,
-            "count": 1,
+            "count": 0,
             "update": false,
             "data": {
                 "SessionId": "string",

@@ -40,11 +40,15 @@ private:
     QLabel *_lab_status_sdk = nullptr;
     QLabel *_lab_status_host = nullptr;
     QPushButton *_but_connect = nullptr;
+    QPushButton *_but_quit = nullptr;
     QPushButton *_but_update_file = nullptr;
     QPushButton *_but_send_json = nullptr;
     QPushButton *_but_send_api = nullptr;
+    QPushButton *_but_send_stop = nullptr;
     QLineEdit *_edit_api = nullptr;
     QTextEdit *_edit_json = nullptr;
     QListWidget *_lab_err_tips = nullptr;
+    QLabel *_lab_timer_num = nullptr;
+
 };
 #endif // MAIN_WINDOW_H

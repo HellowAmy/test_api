@@ -32,6 +32,8 @@ signals:
 
     void sn_err_tips(QString info);
 
+    void sn_timer_num(int type);
+
 protected:
     std::vector<QTimer*> _vecTask;
 

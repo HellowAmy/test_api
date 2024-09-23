@@ -18,10 +18,12 @@ main_window::main_window(QWidget *parent) : QWidget(parent)
         _lab_status_sdk = new QLabel(this);
         _lab_status_host = new QLabel(this);
         _but_connect = new QPushButton("[连接主机]",this);
+        _but_quit = new QPushButton("[退出连接]",this);
 
         lay->addWidget(_lab_status_sdk);
         lay->addWidget(_lab_status_host);
         lay->addWidget(_but_connect);
+        lay->addWidget(_but_quit);
         lay_main->addLayout(lay);
     }
     {
@@ -36,11 +38,13 @@ main_window::main_window(QWidget *parent) : QWidget(parent)
     }
     {
         QHBoxLayout *lay = new QHBoxLayout;
-        _but_update_file = new QPushButton("[更新配置文件并发送]",this);
+        _but_update_file = new QPushButton("[发送配置文件协议]",this);
         _but_send_json = new QPushButton("[发送自定义协议]",this);
+        _but_send_stop = new QPushButton("[停止所有发送协议]",this);
 
         lay->addWidget(_but_update_file);
         lay->addWidget(_but_send_json);
+        lay->addWidget(_but_send_stop);
         lay_main->addLayout(lay);
     }
     {
@@ -52,8 +56,12 @@ main_window::main_window(QWidget *parent) : QWidget(parent)
         _lab_err_tips->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Maximum);
         _lab_err_tips->setMaximumHeight(150);
 
+        _lab_timer_num = new QLabel(this);
+        _lab_timer_num->setText(QString("[定时任务数量: %1]").arg(0));
+
         lay->addWidget(_edit_json);
         lay->addWidget(_lab_err_tips);
+        lay->addWidget(_lab_timer_num);
         lay_main->addLayout(lay);
     }
 
@@ -68,7 +76,15 @@ main_window::main_window(QWidget *parent) : QWidget(parent)
             _sp_net_->SendToApiPost(QString::fromStdString(json["api"].asString()),json["data"]);
         }
     });
-    
+
+    connect(_but_quit,&QPushButton::clicked,[=](){
+        auto json = _sp_protocol_->GetApiConfig("/api/Login/LoginOut");
+        if(json["api"].asString() != "")
+        {
+            _sp_net_->SendToApiPost(QString::fromStdString(json["api"].asString()),json["data"]);
+        }
+    });
+
     connect(_but_send_api,&QPushButton::clicked,[=](){
         auto json = _sp_protocol_->GetApiConfig(_edit_api->text());
         QString api = QString::fromStdString(json["api"].asString());
@@ -99,6 +115,10 @@ main_window::main_window(QWidget *parent) : QWidget(parent)
         }).Error([=](){
             SetErrTips(QString("协议内容解析失败: %1").arg(sjson));
         });
+    });
+
+    connect(_but_send_stop,&QPushButton::clicked,[=](){
+        _sp_net_->ResetTask();
     });
 
     connect(_but_update_file,&QPushButton::clicked,[=](){
@@ -132,6 +152,9 @@ main_window::main_window(QWidget *parent) : QWidget(parent)
     });
     connect(_sp_net_,&NetHandle::sn_err_tips,[=](QString info){
         SetErrTips(info);
+    });
+    connect(_sp_net_,&NetHandle::sn_timer_num,[=](int num){
+        _lab_timer_num->setText(QString("[定时任务数量: %1]").arg(num));
     });
 }
 

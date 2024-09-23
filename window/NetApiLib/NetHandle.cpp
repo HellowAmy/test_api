@@ -99,6 +99,7 @@ void NetHandle::PushTaskPost(Json::Value config)
             SendToApiGet(QString::fromStdString(config["api"].asString()),config["data"]);
         }
     }
+    emit sn_timer_num(_vecTask.size());
 
 }
 
@@ -110,4 +111,5 @@ void NetHandle::ResetTask()
         a->deleteLater();
     }
     _vecTask.clear();
+    emit sn_timer_num(_vecTask.size());
 }
